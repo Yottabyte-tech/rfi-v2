@@ -4,6 +4,8 @@ import './App.css';
 import chaiyaImg from '/ChaiyaSmall.jpg';
 
 function App() {
+
+
   // 5. Use state to hold the output, allowing React to re-render the component.
   const [out, setOut] = useState("Processing image...");
   // 2. Use useRef to get a reference to the canvas DOM element.
@@ -30,11 +32,29 @@ function App() {
       // Your pixel processing logic
       for(let y = 0; y < img.height; y++){
         for(let x = 0; x < img.width; x++){
+
+          
+          var red = getPixel(ctx, x, y, "red")
+          var green = getPixel(ctx, x, y, "green")
+          var blue = getPixel(ctx, x, y, "blue")
+
+
           final += x + " ";
-          final += y + " ";
-          final += getPixel(ctx, x, y, "red") + " ";
-          final += getPixel(ctx, x, y, "green") + " ";
-          final += getPixel(ctx, x, y, "blue") + " ";
+          final += y + x/5 + " ";
+
+          if(red < 50 && green < 50 && blue < 50){
+            red -= 2
+            green -= 2
+            blue -= 2
+
+          }
+
+
+          final += red + " ";
+          final += green +  " ";
+          final += blue + " ";
+
+
         }
       }
 
@@ -51,7 +71,7 @@ function App() {
       setOut("Error loading image.");
     };
 
-  }, []); // The empty dependency array ensures this effect runs only once, on mount.
+  }, []);
 
   function getPixel(ctx, x, y, clr){
     const imageData = ctx.getImageData(x, y, 1, 1);
@@ -70,9 +90,7 @@ function App() {
   return (
     <>
       <div>
-        {/* 2. Attach the ref to the canvas element */}
         <canvas ref={canvasRef} width={500} height={500}></canvas>
-        {/* 5. Display the state variable */}
         <p id='outCode'>{out}</p>
       </div>
     </>

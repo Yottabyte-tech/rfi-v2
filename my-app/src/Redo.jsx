@@ -40,6 +40,7 @@ function Redo() {
         data[pixelIndex + 2] = b;
         data[pixelIndex + 3] = 255;
       }
+
     }
     ctx.putImageData(imageData, 0, 0);
   }, [imageS, xVal, yVal]);
@@ -73,9 +74,7 @@ function Redo() {
           onChange={(e) => setYVal(Number(e.target.value))}
           className="submit"
         />
-        <button onClick={() => {}} className="inputCoo">
-          Input Dimensions
-        </button>
+
       </div>
       <div id="InputImage">
         <textarea
@@ -89,9 +88,7 @@ function Redo() {
         ></textarea>
       </div>
       <div id="inputText">
-        <button className="TXTButton">
-          Generate Image
-        </button>
+
       </div>
     </>
   );
